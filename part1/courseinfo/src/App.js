@@ -1,3 +1,5 @@
+import { paste } from "@testing-library/user-event/dist/paste"
+
 const Header = (props) => {
   return (
     <div>
@@ -9,6 +11,7 @@ const Header = (props) => {
 const Content = (props) => {
   return (
     <div>
+        {props.parts.map(value => (<p> {value.name} {value.exercises}</p>))}
     </div>
   )
 }
@@ -16,10 +19,10 @@ const Content = (props) => {
 const Total = (props) => {
   return (
     <div>
-      <p> Number of exercices {props.total}</p>
+      <p> Number of exercices {props.parts[0].exercises +
+      props.parts[1].exercises + props.parts[2].exercises}</p>
     </div>
   )
-  
 }
 
 const App = () => {
@@ -42,6 +45,7 @@ const App = () => {
     <div>
       <Header course={course} />
       <Content parts={parts} /> 
+      <Total parts={parts} />
     </div>
   )
 }
